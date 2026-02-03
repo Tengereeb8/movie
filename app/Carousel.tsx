@@ -38,47 +38,50 @@ const movies: MovieSlide[] = [
 
 export const MovieCarousel = () => {
   return (
-    <Carousel className="relative w-screen md:max-w-360 mx-auto">
+    <Carousel className="relative w-screen lg:h-150 h-auto lg:max-w-360 mx-auto">
       <CarouselContent>
         {movies.map((movie) => (
-          <CarouselItem
-            key={movie.id}
-            className="relative h-fit flex justify-center "
-          >
+          <CarouselItem key={movie.id} className="flex flex-col lg:relative">
+            {/* IMAGE */}
             <img
               src={movie.src}
-              className="w-screen  h-150 object-cover"
+              className="w-screen h-61.5 lg:h-150 object-cover"
               alt={movie.title}
             />
 
-            <div className="absolute inset-0  flex flex-col justify-end p-12 text-white ml-35  mb-29.5">
+            {/* TEXT */}
+            <div
+              className="
+            flex flex-col gap-2 p-4 text-black
+            lg:absolute lg:inset-0 lg:justify-end
+            lg:p-12 lg:text-white lg:ml-35 lg:mb-29.5
+          "
+            >
               <p className="text-base">Now playing:</p>
-              <h2 className="text-4xl font-bold mb-2">{movie.title}</h2>
-              <div className="flex gap-1 pl-2 pt-2">
+
+              <h2 className="text-2xl lg:text-4xl font-bold">{movie.title}</h2>
+
+              <div className="flex gap-1 items-center">
                 <img src="/Star.svg" alt="" />
                 <p>
-                  {movie.rating} <span className="text-[#71717a]">/10</span>
+                  {movie.rating}{" "}
+                  <span className="text-[#71717a] lg:text-gray-300">/10</span>
                 </p>
               </div>
-              <p className="text-lg text-gray-200 max-w-md pt-4">
+
+              <p className="text-sm lg:text-lg lg:text-gray-200 max-w-md">
                 {movie.description}
               </p>
-              <ButtonDefault />
+
+              <div className="mt-2 lg:mt-4">
+                <ButtonDefault />
+              </div>
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
 
-      {movies.map((movie) => {
-        if (movie.id > 1) {
-          return (
-            <CarouselPrevious
-              key={movie.id}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10"
-            />
-          );
-        }
-      })}
+      <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-10" />
       <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-10" />
     </Carousel>
   );
