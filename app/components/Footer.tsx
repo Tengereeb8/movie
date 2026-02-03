@@ -1,6 +1,6 @@
 export const Footer = () => {
   return (
-    <div className="min-w-fit h-70 bg-indigo-700 text-white flex items-center justify-between px-20">
+    <div className="max-w-360 mx-auto h-70 bg-indigo-700 text-white flex items-center justify-between px-20">
       <div className="">
         <footer className="text-white flex gap-2">
           <img src="/white.svg" alt="" />

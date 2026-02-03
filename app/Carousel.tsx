@@ -38,7 +38,7 @@ const movies: MovieSlide[] = [
 
 export const MovieCarousel = () => {
   return (
-    <Carousel className="relative w-screen ">
+    <Carousel className="relative w-screen md:max-w-360 mx-auto">
       <CarouselContent>
         {movies.map((movie) => (
           <CarouselItem

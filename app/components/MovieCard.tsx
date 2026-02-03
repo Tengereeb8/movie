@@ -7,15 +7,21 @@ type MovieCardProps = {
 export const MovieCard = (props: MovieCardProps) => {
   const { img, rating, title } = props;
   return (
-    <div className="h-110 w-57.5  rounded-lg bg-[#f4f4f5]">
-      <img src={img} alt="" className="rounded-t-lg h-85 w-57.5" />
-      <div className="flex gap-1 pl-2 pt-2">
-        <img src="/Star.svg" alt="" />
-        <p>
+    <div className="lg:h-110 lg:w-57.5 w-39.5 h-77.25 rounded-lg bg-[#f4f4f5] overflow-hidden shadow-sm">
+      <img
+        src={img}
+        alt={title}
+        className="rounded-t-lg lg:h-85 h-58.25 w-full object-cover"
+      />
+
+      <div className="flex gap-1 pl-2 pt-2 items-center">
+        <img src="/Star.svg" alt="" className="w-4 h-4" />
+        <p className="font-medium">
           {rating} <span className="text-[#71717a]">/10</span>
         </p>
       </div>
-      <p className="pl-2">{title}</p>
+
+      <p className="pl-2 font-semibold truncate">{title}</p>
     </div>
   );
 };
