@@ -42,14 +42,12 @@ export const MovieCarousel = () => {
       <CarouselContent>
         {movies.map((movie) => (
           <CarouselItem key={movie.id} className="flex flex-col lg:relative">
-            {/* IMAGE */}
             <img
               src={movie.src}
               className="w-screen h-61.5 lg:h-150 object-cover"
               alt={movie.title}
             />
 
-            {/* TEXT */}
             <div
               className="
             flex flex-col gap-2 p-4 text-black
