@@ -60,6 +60,7 @@
 //     </div>
 //   );
 // };
+import { title } from "process";
 import { Category } from "./Category";
 import { MovieCard } from "./components/MovieCard";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -82,9 +83,17 @@ export const Body = ({
   isLoading?: boolean;
 }) => {
   const sections = [
-    { title: "Upcoming", data: upComingMovies?.slice(0, 10) },
-    { title: "Popular", data: movies?.slice(0, 10) },
-    { title: "Top Rated", data: topratedMovies?.slice(0, 10) },
+    {
+      title: "Upcoming",
+      data: upComingMovies?.slice(0, 10),
+      href: "/upcoming",
+    },
+    { title: "Popular", data: movies?.slice(0, 10), href: "/popular" },
+    {
+      title: "Top Rated",
+      data: topratedMovies?.slice(0, 10),
+      href: "/top-rated",
+    },
   ];
 
   return (
@@ -92,7 +101,7 @@ export const Body = ({
       {sections.map((section, idx) => (
         <div key={idx} className="mx-auto max-w-360">
           <div className="px-5 py-8">
-            <Category category={section.title} />
+            <Category category={section.title} href={section.href} />
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-5 w-fit lg:max-w-360 mx-auto gap-5 lg:gap-8">

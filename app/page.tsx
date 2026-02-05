@@ -86,14 +86,12 @@ const Home = async () => {
 
   return (
     <div>
-      <Nav />
       <MovieCarousel movies={movies} />
       <Body
         movies={movies}
         upComingMovies={upComingMovies}
         topratedMovies={topratedMovies}
       />
-      <Footer />
     </div>
   );
 };

@@ -24,34 +24,25 @@
 //     </div>
 //   );
 // };
-import { Skeleton } from "@/components/ui/skeleton";
+// Category.tsx (or SeeMore.tsx)
+import Link from "next/link";
 
-// 1. Improved Skeleton to match the "Category Title" + "See More" button shape
-const CategorySkeleton = () => (
-  <div className="flex justify-between items-center w-full">
-    <Skeleton className="h-8 w-40 rounded-md bg-muted" />{" "}
-    <Skeleton className="h-5 w-20 rounded-md bg-muted" />{" "}
-  </div>
-);
-
-type categoryType = {
+interface CategoryProps {
   category: string;
-  isLoading?: boolean;
-};
+  href: string;
+}
 
-export const Category = ({ category, isLoading }: categoryType) => {
-  if (isLoading) {
-    return <CategorySkeleton />;
-  }
-
+export const Category = ({ category, href }: CategoryProps) => {
   return (
     <div className="flex justify-between items-center">
       <h2 className="font-bold text-2xl">{category}</h2>
-
-      <button className="flex items-center gap-1 text-sm font-medium hover:underline">
+      <Link
+        href={href}
+        className="flex items-center gap-1 text-sm font-medium hover:underline"
+      >
         See More
         <img src="/ar.svg" alt="Arrow icon" className="w-4 h-4" />
-      </button>
+      </Link>
     </div>
   );
 };
