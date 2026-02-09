@@ -113,7 +113,7 @@ export const Body = ({
           {isLoading ? (
             <TextSkeleton />
           ) : (
-            <div className="px-5 py-8">
+            <div className="lg:px-20  px-7 py-8">
               <Category category={section.title} href={section.href} />
             </div>
           )}
