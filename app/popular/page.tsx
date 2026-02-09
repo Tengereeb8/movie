@@ -11,6 +11,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { MovieCard } from "../components/MovieCard";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const getPopularMovies = async (page: number) => {
   const token =
@@ -38,6 +39,21 @@ export default function PopularPage() {
   const [loading, setLoading] = useState(true);
 
   const currentPage = Number(searchParams.get("page")) || 1;
+  const TextSkeleton = () => (
+    <div className="px-5 py-4">
+      <div className="flex justify-between items-center">
+        <Skeleton className="h-6 w-40" />
+        <div className="flex items-center gap-1">
+          <Skeleton className="h-6 w-16" />
+        </div>
+      </div>
+    </div>
+  );
+  const MovieCardSkeleton = () => (
+    <div className="flex flex-col gap-2">
+      <Skeleton className="lg:h-110 lg:w-57.5 w-39.5 h-77.25 rounded-lg bg-[#f4f4f5] overflow-hidden shadow-sm" />
+    </div>
+  );
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -90,23 +106,25 @@ export default function PopularPage() {
 
   const pageNumbers = getPageNumbers();
 
-  if (loading) {
-    return <div className="text-center py-20">Loading...</div>;
-  }
-
   return (
     <div>
       <main className="mx-auto max-w-360">
-        <h1 className="text-3xl font-bold mb-8 ml-8">Popular Movies</h1>
+        {loading ? (
+          <TextSkeleton />
+        ) : (
+          <h1 className="text-3xl font-bold mb-8 ml-8">Popular Movies</h1>
+        )}
         <div className="grid grid-cols-2 lg:grid-cols-5 w-fit lg:max-w-360 mx-auto gap-5 md:grid-cols-4 lg:gap-8 mb-8">
-          {movies.map((movie: any) => (
-            <MovieCard
-              key={movie.id}
-              title={movie.title}
-              img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              rating={movie.vote_average.toFixed(1)}
-            />
-          ))}
+          {loading
+            ? movies.map((movie: any) => <MovieCardSkeleton key={movie.id} />)
+            : movies.map((movie: any) => (
+                <MovieCard
+                  key={movie.id}
+                  title={movie.title}
+                  img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  rating={movie.vote_average.toFixed(1)}
+                />
+              ))}
         </div>
       </main>
 

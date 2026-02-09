@@ -70,6 +70,16 @@ const MovieCardSkeleton = () => (
     <Skeleton className="lg:h-110 lg:w-57.5 w-39.5 h-77.25 rounded-lg bg-[#f4f4f5] overflow-hidden shadow-sm" />
   </div>
 );
+const TextSkeleton = () => (
+  <div className="px-5 py-4">
+    <div className="flex justify-between items-center">
+      <Skeleton className="h-6 w-40" />
+      <div className="flex items-center gap-1">
+        <Skeleton className="h-6 w-16" />
+      </div>
+    </div>
+  </div>
+);
 
 export const Body = ({
   movies,
@@ -100,9 +110,13 @@ export const Body = ({
     <div className="mb-12.75 px-5">
       {sections.map((section, idx) => (
         <div key={idx} className="mx-auto max-w-360">
-          <div className="px-5 py-8">
-            <Category category={section.title} href={section.href} />
-          </div>
+          {isLoading ? (
+            <TextSkeleton />
+          ) : (
+            <div className="px-5 py-8">
+              <Category category={section.title} href={section.href} />
+            </div>
+          )}
 
           <div className="grid grid-cols-2 lg:grid-cols-5 w-fit lg:max-w-360 mx-auto gap-5 lg:gap-8">
             {isLoading

@@ -1,22 +1,22 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   Pagination,
   PaginationContent,
   PaginationEllipsis,
   PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
 } from "@/components/ui/pagination";
-
-import { Footer } from "../components/Footer";
 import { MovieCard } from "../components/MovieCard";
-import { Nav } from "../components/Navigation";
-const getUpcomingMovies = async () => {
+import { Skeleton } from "@/components/ui/skeleton";
+
+const getUpcomingMovies = async (page: number) => {
   const token =
     "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YTA3MzAyNTFjYzIzMmYyM2I0NGQ1ZGY4NTA1M2E2NCIsIm5iZiI6MTc2OTY1ODEyMy4xMzYsInN1YiI6IjY5N2FkNzBiY2VhNzhhMGRiYzhmOGFhNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sECnoPIecqeqEVfZsxsYtnSegaVtrj9uW3v4fgSuz6k";
 
   const res = await fetch(
-    "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
+    `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${page}`,
     {
       method: "GET",
       headers: {
@@ -26,55 +26,170 @@ const getUpcomingMovies = async () => {
     },
   );
 
-  if (!res.ok) return [];
+  if (!res.ok) return { results: [], total_pages: 0 };
   const data = await res.json();
-  console.log(data);
-
-  return data.results;
+  return data;
 };
-export default async function UpcomingPage() {
-  const movies = await getUpcomingMovies();
+
+export default function UpcomingPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [movies, setMovies] = useState<any[]>([]);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  const currentPage = Number(searchParams.get("page")) || 1;
+  const TextSkeleton = () => (
+    <div className="px-5 py-4">
+      <div className="flex justify-between items-center">
+        <Skeleton className="h-6 w-40" />
+        <div className="flex items-center gap-1">
+          <Skeleton className="h-6 w-16" />
+        </div>
+      </div>
+    </div>
+  );
+  const MovieCardSkeleton = () => (
+    <div className="flex flex-col gap-2">
+      <Skeleton className="lg:h-110 lg:w-57.5 w-39.5 h-77.25 rounded-lg bg-[#f4f4f5] overflow-hidden shadow-sm" />
+    </div>
+  );
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      setLoading(true);
+      const data = await getUpcomingMovies(currentPage);
+      setMovies(data.results);
+      setTotalPages(data.total_pages > 500 ? 500 : data.total_pages);
+      setLoading(false);
+    };
+
+    fetchMovies();
+  }, [currentPage]);
+
+  const handlePageChange = (page: number) => {
+    router.push(`?page=${page}`);
+  };
+
+  const getPageNumbers = () => {
+    const pages = [];
+    const maxVisible = 5;
+
+    if (totalPages <= maxVisible) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+    } else {
+      if (currentPage <= 3) {
+        pages.push(1, 2, 3, 4, 5);
+      } else if (currentPage >= totalPages - 2) {
+        for (let i = totalPages - 4; i <= totalPages; i++) pages.push(i);
+      } else {
+        pages.push(
+          currentPage - 2,
+          currentPage - 1,
+          currentPage,
+          currentPage + 1,
+          currentPage + 2,
+        );
+      }
+    }
+    return pages;
+  };
+
+  const pageNumbers = getPageNumbers();
+
+  if (loading) {
+    return (
+      <div className="text-center py-20 font-medium">
+        Loading Upcoming Movies...
+      </div>
+    );
+  }
 
   return (
     <div>
-      <main className="mx-auto max-w-360 ">
-        {" "}
-        <h1 className="text-2xl max-w-360 mx-auto font-bold mb-8 ml-8">
-          Upcoming Movies
-        </h1>
-        <div className="grid grid-cols-2 lg:grid-cols-5 w-fit lg:max-w-360 mx-auto gap-5 md:grid-cols-4 lg:gap-8">
-          {" "}
-          {movies.map((movie: any) => (
-            <MovieCard
-              key={movie.id}
-              title={movie.title}
-              img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              rating={movie.vote_average.toFixed(1)}
-            />
-          ))}
+      <main className="mx-auto max-w-360">
+        {loading ? (
+          <TextSkeleton />
+        ) : (
+          <h1 className="text-3xl font-bold mb-8 ml-8">Popular Movies</h1>
+        )}
+
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 w-fit lg:max-w-360 mx-auto gap-5 lg:gap-8 mb-8">
+          {loading
+            ? movies.map((movie: any) => <MovieCardSkeleton key={movie.id} />)
+            : movies.map((movie: any) => (
+                <MovieCard
+                  key={movie.id}
+                  title={movie.title}
+                  img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  rating={movie.vote_average.toFixed(1)}
+                />
+              ))}
         </div>
       </main>
-      <Pagination className="mb-8 mt-8">
+
+      <Pagination className="mb-8 mt-8 cursor-pointer">
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious href="#" />
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="inline-flex items-center justify-center gap-1 px-2.5 h-10 rounded-md text-sm font-medium disabled:opacity-50 disabled:pointer-events-none hover:bg-accent"
+            >
+              <span>Previous</span>
+            </button>
           </PaginationItem>
+
+          {pageNumbers[0] > 1 && (
+            <>
+              <PaginationItem>
+                <button
+                  onClick={() => handlePageChange(1)}
+                  className="h-10 w-10 rounded-md text-sm hover:bg-accent"
+                >
+                  1
+                </button>
+              </PaginationItem>
+              {pageNumbers[0] > 2 && <PaginationEllipsis />}
+            </>
+          )}
+          {pageNumbers.map((pageNum) => (
+            <PaginationItem key={pageNum}>
+              <button
+                onClick={() => handlePageChange(pageNum)}
+                className={`h-10 w-10 rounded-md text-sm font-medium hover:bg-accent transition-colors ${
+                  currentPage === pageNum ? "bg-zinc-100 border shadow-sm" : ""
+                }`}
+              >
+                {pageNum}
+              </button>
+            </PaginationItem>
+          ))}
+
+          {pageNumbers[pageNumbers.length - 1] < totalPages && (
+            <>
+              {pageNumbers[pageNumbers.length - 1] < totalPages - 1 && (
+                <PaginationEllipsis />
+              )}
+              <PaginationItem>
+                <button
+                  onClick={() => handlePageChange(totalPages)}
+                  className="h-10 w-10 rounded-md text-sm hover:bg-accent"
+                >
+                  {totalPages}
+                </button>
+              </PaginationItem>
+            </>
+          )}
+
           <PaginationItem>
-            <PaginationLink href="#">1</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#" isActive>
-              2
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">3</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext href="#" />
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="inline-flex items-center justify-center gap-1 px-2.5 h-10 rounded-md text-sm font-medium disabled:opacity-50 disabled:pointer-events-none hover:bg-accent"
+            >
+              <span>Next</span>
+            </button>
           </PaginationItem>
         </PaginationContent>
       </Pagination>
