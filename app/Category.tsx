@@ -41,7 +41,12 @@ export const Category = ({ category, href }: CategoryProps) => {
         className="flex items-center gap-1 text-sm font-medium hover:underline"
       >
         See More
-        <img src="/ar.svg" alt="Arrow icon" className="w-4 h-4" />
+        <img src="/ar.svg" alt="Arrow icon" className="w-4 h-4 dark:hidden" />
+        <img
+          src="/war.svg"
+          alt="Arrow icon"
+          className="w-4 h-4 dark:block hidden"
+        />
       </Link>
     </div>
   );

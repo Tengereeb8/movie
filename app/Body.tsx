@@ -65,7 +65,7 @@ export const Body = ({
                   <MovieCardSkeleton key={i} />
                 ))
               : section.data?.map((movie) => (
-                  <Link href={`/movie/${movie.id}`} key={movie.id}>
+                  <Link href={`/MovieDetail`} key={movie.id}>
                     <MovieCard
                       key={movie.id}
                       img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
