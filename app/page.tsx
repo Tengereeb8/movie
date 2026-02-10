@@ -80,6 +80,27 @@ const TrailerUrl = async () => {
 
   return data.results;
 };
+const getMovieDetail = async () => {
+  const token =
+    "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YTA3MzAyNTFjYzIzMmYyM2I0NGQ1ZGY4NTA1M2E2NCIsIm5iZiI6MTc2OTY1ODEyMy4xMzYsInN1YiI6IjY5N2FkNzBiY2VhNzhhMGRiYzhmOGFhNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sECnoPIecqeqEVfZsxsYtnSegaVtrj9uW3v4fgSuz6k";
+
+  const res = await fetch(
+    "https://api.themoviedb.org/movie/${movieId}?language=en-US",
+    {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  if (!res.ok) return [];
+  const data = await res.json();
+  console.log(data);
+
+  return data.results;
+};
 const getTopratedMovies = async () => {
   const token =
     "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YTA3MzAyNTFjYzIzMmYyM2I0NGQ1ZGY4NTA1M2E2NCIsIm5iZiI6MTc2OTY1ODEyMy4xMzYsInN1YiI6IjY5N2FkNzBiY2VhNzhhMGRiYzhmOGFhNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sECnoPIecqeqEVfZsxsYtnSegaVtrj9uW3v4fgSuz6k";
@@ -104,6 +125,7 @@ const Home = async () => {
   const movies = await getPopularMovies();
   const upComingMovies = await getUpcomingMovies();
   const topratedMovies = await getTopratedMovies();
+  const movieDetail = await getMovieDetail();
 
   return (
     <div>
@@ -112,6 +134,7 @@ const Home = async () => {
         movies={movies}
         upComingMovies={upComingMovies}
         topratedMovies={topratedMovies}
+        movieDetail={movieDetail}
       />
     </div>
   );
