@@ -107,7 +107,7 @@ const MovieDetail = () => {
   // Loading skeleton
   if (loading) {
     return (
-      <div className="min-h-screen  max-w-360 mx-auto text-white p-6">
+      <div className="min-h-screen   max-w-360 mx-auto text-white p-6">
         <Skeleton className="h-8 w-32 mb-6" />
         <div className="max-w-6xl mx-auto">
           <Skeleton className="h-96 w-full rounded-lg mb-6" />

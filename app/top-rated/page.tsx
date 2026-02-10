@@ -103,7 +103,7 @@ export default function TopRatedPage() {
         {loading ? (
           <TextSkeleton />
         ) : (
-          <h1 className="text-3xl font-bold mb-8 ml-8">Top Rated Movies</h1>
+          <h1 className="text-3xl font-bold mb-8 ml-20">Top Rated Movies</h1>
         )}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 w-fit lg:max-w-360 mx-auto gap-5 lg:gap-8 mb-8">
           {loading
