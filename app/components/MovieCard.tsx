@@ -1,6 +1,6 @@
 type MovieCardProps = {
   img: string;
-  rating: number;
+  rating: string;
   title: string;
 };
 
