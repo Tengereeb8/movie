@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/pagination";
 import { MovieCard } from "../components/MovieCard";
 import { Skeleton } from "@/components/ui/skeleton";
+import Link from "next/link";
 
 const MovieCardSkeleton = () => (
   <div className="flex flex-col gap-2">
@@ -109,12 +110,13 @@ export default function TopRatedPage() {
           {loading
             ? movies.map((movie: any) => <MovieCardSkeleton key={movie.id} />)
             : movies.map((movie: any) => (
-                <MovieCard
-                  key={movie.id}
-                  title={movie.title}
-                  img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  rating={movie.vote_average.toFixed(1)}
-                />
+                <Link href={`/${movie.id}`} key={movie.id}>
+                  <MovieCard
+                    title={movie.title}
+                    img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    rating={movie.vote_average.toFixed(1)}
+                  />
+                </Link>
               ))}
         </div>
       </main>
