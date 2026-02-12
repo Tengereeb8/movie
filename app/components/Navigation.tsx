@@ -1,322 +1,3 @@
-// import Link from "next/link";
-// import Image from "next/image";
-// import { Badge } from "@/components/ui/badge";
-// "use client"
-
-// import * as React from "react"
-// import { Moon, Sun } from "lucide-react"
-// import { useTheme } from "next-themes"
-
-// import { Button } from "@/components/ui/button"
-// import {
-//   DropdownMenu,
-//   DropdownMenuContent,
-//   DropdownMenuItem,
-//   DropdownMenuTrigger,
-// } from "@/components/ui/dropdown-menu"
-
-// export function ModeToggle() {
-//   const { setTheme } = useTheme()
-
-//   return (
-//     <DropdownMenu>
-//       <DropdownMenuTrigger asChild>
-//         <Button variant="outline" size="icon">
-//           <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-//           <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-//           <span className="sr-only">Toggle theme</span>
-//         </Button>
-//       </DropdownMenuTrigger>
-//       <DropdownMenuContent align="end">
-//         <DropdownMenuItem onClick={() => setTheme("light")}>
-//           Light
-//         </DropdownMenuItem>
-//         <DropdownMenuItem onClick={() => setTheme("dark")}>
-//           Dark
-//         </DropdownMenuItem>
-//         <DropdownMenuItem onClick={() => setTheme("system")}>
-//           System
-//         </DropdownMenuItem>
-//       </DropdownMenuContent>
-//     </DropdownMenu>
-//   )
-// }
-
-// import {
-//   NavigationMenu,
-//   NavigationMenuContent,
-//   NavigationMenuItem,
-//   NavigationMenuLink,
-//   NavigationMenuList,
-//   NavigationMenuTrigger,
-// } from "@/components/ui/navigation-menu";
-
-// export const Nav = () => {
-//   return (
-//     <nav className=" md:max-w-360 w-screen  mx-auto h-15 items-center flex lg:px-20 px-5 justify-between ">
-//       <Link
-//         className="text-indigo-700 flex items-center gap-2 font-sans"
-//         href="/"
-//       >
-//         <Image src="/film.svg" alt="Film icon" width={20} height={20} />
-//         Movie Z
-//       </Link>
-
-//       <nav className="flex gap-3">
-//         <NavigationMenu className="">
-//           <NavigationMenuList>
-//             <NavigationMenuItem>
-//               <NavigationMenuTrigger className="bg-[#ffffff] hover:bg-white ">
-//                 <p>
-//                   <span className="hidden lg:block">Genre</span>
-//                   <span className="flex lg:hidden"></span>
-//                 </p>
-//               </NavigationMenuTrigger>
-//               <NavigationMenuContent>
-//                 <NavigationMenuLink className="w-83.75 h-128.25 lg:w-144.25 lg:h-83.25">
-//                   <h1 className="text-2xl font-bold">Genres</h1>
-//                   <p className="border-b border-b-[#E4E4E7] pt-1 pb-4">
-//                     See lists of movies by genre
-//                   </p>
-
-//                   <div className="flex flex-wrap gap-2 mt-1">
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <span className="flex items-center gap-1 text-xs">
-//                         Action <img src="/cr.svg" className="w-4 h-4" />
-//                       </span>
-//                     </Badge>
-
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <span className="flex items-center gap-1 text-xs">
-//                         Adventure <img src="/cr.svg" className="w-4 h-4" />
-//                       </span>
-//                     </Badge>
-
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Animation
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Biography
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Comedy
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Crime
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Documentary
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Drama
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Family
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Fantasy
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Film Noir
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Game-Show
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         History
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Horror
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Music
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Musical
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Mystery
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         News
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Reality-TV
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Romance
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Sci-Fi
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Short
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Sport
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Talk-Show
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Thriller
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         War
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                     <Badge className="w-fit bg-white text-black flex justify-around items-center border border-[#E4E4E7] mt-4">
-//                       <p className="flex items-center text-xs">
-//                         Western
-//                         <span>
-//                           <img src="/cr.svg" alt="" className="w-4 h-4" />
-//                         </span>
-//                       </p>
-//                     </Badge>
-//                   </div>
-//                 </NavigationMenuLink>
-//               </NavigationMenuContent>
-//             </NavigationMenuItem>
-//           </NavigationMenuList>
-//         </NavigationMenu>
-//         <div></div>
-//         <search className="md:flex hidden gap-2.5 border border-[#e4e4e7] rounded-md items-center w-95 h-9 pl-3">
-//           <img src="/searvh.svg" alt="" className="w-4 h-4 " />
-//           <span className="text-[#71717a]">Search...</span>
-//         </search>
-//       </nav>
-//       <div className="flex gap-3">
-//         <search className="md:hidden flex gap-2.5 border border-[#e4e4e7] rounded-md items-center w-9 h-9 justify-center">
-//           <img src="/searvh.svg" alt="" className="w-4 h-4 " />
-//         </search>
-//         <nav className="w-9 h-9 border border-[#e4e4e7] rounded-md flex items-center justify-center">
-//           <img src="/moon.svg" alt="" />{" "}
-//         </nav>
-//       </div>
-//     </nav>
-//   );
-// };
-"use client";
-
 import * as React from "react";
 import Link from "next/link";
 import {
@@ -337,38 +18,31 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { ModeToggle } from "@/components/ui/mode-toggle";
+import { data } from "react-router-dom";
 
-const GENRES = [
-  "Action",
-  "Adventure",
-  "Animation",
-  "Biography",
-  "Comedy",
-  "Crime",
-  "Documentary",
-  "Drama",
-  "Family",
-  "Fantasy",
-  "Film Noir",
-  "Game-Show",
-  "History",
-  "Horror",
-  "Music",
-  "Musical",
-  "Mystery",
-  "News",
-  "Reality-TV",
-  "Romance",
-  "Sci-Fi",
-  "Short",
-  "Sport",
-  "Talk-Show",
-  "Thriller",
-  "War",
-  "Western",
-];
+const getMovieGenre = async () => {
+  const token =
+    "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YTA3MzAyNTFjYzIzMmYyM2I0NGQ1ZGY4NTA1M2E2NCIsIm5iZiI6MTc2OTY1ODEyMy4xMzYsInN1YiI6IjY5N2FkNzBiY2VhNzhhMGRiYzhmOGFhNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sECnoPIecqeqEVfZsxsYtnSegaVtrj9uW3v4fgSuz6k";
 
-export const Nav = () => {
+  const res = await fetch(
+    "https://api.themoviedb.org/3/genre/movie/list?language=en",
+    {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  if (!res.ok) return [];
+  const data = await res.json();
+  console.log(data.genres);
+  return data.genres;
+};
+
+export const Nav = async () => {
+  const genres = await getMovieGenre();
   return (
     <nav className="md:max-w-360 w-screen mx-auto h-15 items-center flex lg:px-20 px-5 justify-between">
       <Link
@@ -389,19 +63,19 @@ export const Nav = () => {
                 <span className="lg:hidden"></span>
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <div className="p-6 w-80 lg:w-[500px]">
+                <div className="p-6 w-80 lg:w-125">
                   <h1 className="text-2xl font-bold">Genres</h1>
                   <p className="border-b border-zinc-200 dark:border-zinc-800 pt-1 pb-4 mb-4 text-muted-foreground">
                     See lists of movies by genre
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {GENRES.map((genre) => (
+                    {genres.map((genre: { id: number; name: string }) => (
                       <Badge
-                        key={genre}
+                        key={genre.id}
                         variant="outline"
                         className="cursor-pointer hover:bg-secondary flex items-center gap-1"
                       >
-                        {genre}
+                        {genre.name}
                         <img
                           src="/cr.svg"
                           className="w-3 h-3 opacity-50 dark:hidden"
@@ -425,7 +99,7 @@ export const Nav = () => {
           <InputGroupAddon>
             <Search />
           </InputGroupAddon>
-          <InputGroupAddon align="inline-end">12 results</InputGroupAddon>
+          <InputGroupAddon align="inline-end"></InputGroupAddon>
         </InputGroup>
       </div>
 
