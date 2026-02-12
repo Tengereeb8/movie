@@ -311,7 +311,7 @@ export const MovieCarousel = ({
                 </p>
                 <div className="mt-2 lg:mt-4">
                   {trailer && (
-                    <div className="w-[997px] h-full">
+                    <div className="lg:w-249.25 lg:h-full w-93.75 h-53">
                       <Dialog>
                         <DialogTrigger asChild className="">
                           <Button className="lg:bg-white bg-black text-white hover:bg-white hover:shadow-lg dark:text-black dark:bg-white lg:text-black">
@@ -328,11 +328,11 @@ export const MovieCarousel = ({
                             Play Trailer
                           </Button>
                         </DialogTrigger>
-                        <DialogContent className="min-w-[997px] h-fit  p-0 overflow-hidden">
+                        <DialogContent className="lg:min-w-249.25  lg:h-fit  p-0 overflow-hidden">
                           <VisuallyHidden>
                             <DialogTitle>{movie.title} Trailer</DialogTitle>
                           </VisuallyHidden>
-                          <div className="relative w-[997px] h-[500px]">
+                          <div className="relative lg:w-249.25 lg:h-125 w-93.75 h-53">
                             <iframe
                               className="absolute top-0 left-0 w-full h-full"
                               src={`https://www.youtube.com/embed/${trailer.key}?autoplay=1`}

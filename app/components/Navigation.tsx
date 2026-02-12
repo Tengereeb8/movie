@@ -319,6 +319,13 @@
 
 import * as React from "react";
 import Link from "next/link";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group";
+import { Search } from "lucide-react";
+
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -413,28 +420,16 @@ export const Nav = () => {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-
-        <div className="md:flex hidden gap-2.5 border border-zinc-200 dark:border-zinc-800 rounded-md items-center w-64 h-9 pl-3">
-          <img
-            src="/searvh.svg"
-            alt=""
-            className="w-4 h-4 opacity-50 dark:hidden"
-          />
-          <img
-            src="/wmg.svg"
-            alt=""
-            className="w-4 h-4 opacity-50 dark:flex hidden"
-          />
-          <span className="text-muted-foreground text-sm">Search...</span>
-        </div>
+        <InputGroup className="max-w-xs">
+          <InputGroupInput placeholder="Search..." />
+          <InputGroupAddon>
+            <Search />
+          </InputGroupAddon>
+          <InputGroupAddon align="inline-end">12 results</InputGroupAddon>
+        </InputGroup>
       </div>
 
       <div className="flex items-center gap-3">
-        <div className="md:hidden flex border border-zinc-200 dark:border-zinc-800 rounded-md items-center w-9 h-9 justify-center cursor-pointer">
-          <img src="/searvh.svg" alt="" className="w-4 h-4 dark:hidden" />
-          <img src="/wmg.svg" alt="" className="w-4 h-4 dark:flex hidden" />
-        </div>
-
         <ModeToggle />
       </div>
     </nav>

@@ -13,6 +13,7 @@ import {
 import { MovieCard } from "../components/MovieCard";
 import { Skeleton } from "@/components/ui/skeleton";
 
+import Link from "next/link";
 const getPopularMovies = async (page: number) => {
   const token =
     "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YTA3MzAyNTFjYzIzMmYyM2I0NGQ1ZGY4NTA1M2E2NCIsIm5iZiI6MTc2OTY1ODEyMy4xMzYsInN1YiI6IjY5N2FkNzBiY2VhNzhhMGRiYzhmOGFhNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sECnoPIecqeqEVfZsxsYtnSegaVtrj9uW3v4fgSuz6k";
@@ -118,12 +119,15 @@ export default function PopularPage() {
           {loading
             ? movies.map((movie: any) => <MovieCardSkeleton key={movie.id} />)
             : movies.map((movie: any) => (
-                <MovieCard
-                  key={movie.id}
-                  title={movie.title}
-                  img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  rating={movie.vote_average.toFixed(1)}
-                />
+                <Link href={`/${movie.id}`} key={movie.id}>
+                  {" "}
+                  <MovieCard
+                    key={movie.id}
+                    title={movie.title}
+                    img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    rating={movie.vote_average.toFixed(1)}
+                  />
+                </Link>
               ))}
         </div>
       </main>

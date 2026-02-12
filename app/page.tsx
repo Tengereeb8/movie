@@ -17,7 +17,6 @@
 
 import { Body } from "./Body";
 import { MovieCarousel } from "./Carousel";
-import { Footer } from "./components/Footer";
 import { Nav } from "./components/Navigation";
 
 const getPopularMovies = async () => {
