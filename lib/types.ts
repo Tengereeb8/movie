@@ -1,4 +1,26 @@
-export interface MovieDetails {
+export type MovieResponse = {
+  page: number;
+  results: Movie[]; // Matches your Movie interface
+  total_pages: number;
+  total_results: number;
+};
+export type Movie = {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+};
+export interface Details {
   adult: boolean;
   backdrop_path: string;
   belongs_to_collection: any;
@@ -48,10 +70,12 @@ export interface SpokenLanguage {
   iso_639_1: string;
   name: string;
 }
-export const getMovieByIds = async (movieId: string): Promise<MovieDetails> => {
-  const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${movieId}?language=en-USa`,
-  );
-  const data = await response.json();
-  return data;
-};
+export interface Image {
+  aspect_ratio: number;
+  height: number;
+  iso_639_1: string;
+  file_path: string;
+  vote_average: number;
+  vote_count: number;
+  width: number;
+}

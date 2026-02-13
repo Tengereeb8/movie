@@ -5,7 +5,6 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/components/ui/input-group";
-import { Search } from "lucide-react";
 
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
@@ -19,6 +18,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { data } from "react-router-dom";
+import { SearchInput } from "./Search";
 
 const getMovieGenre = async () => {
   const token =
@@ -54,7 +54,6 @@ export const Nav = async () => {
       </Link>
 
       <div className="flex items-center gap-3">
-        {/* Genre Dropdown */}
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
@@ -94,13 +93,7 @@ export const Nav = async () => {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <InputGroup className="max-w-xs">
-          <InputGroupInput placeholder="Search..." />
-          <InputGroupAddon>
-            <Search />
-          </InputGroupAddon>
-          <InputGroupAddon align="inline-end"></InputGroupAddon>
-        </InputGroup>
+        <SearchInput />
       </div>
 
       <div className="flex items-center gap-3">
