@@ -19,26 +19,38 @@ import {
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { data } from "react-router-dom";
 import { SearchInput } from "./Search";
+import { Search } from "lucide-react";
 
-const getMovieGenre = async () => {
+export const getMovieGenre = async () => {
   const token =
-    "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YTA3MzAyNTFjYzIzMmYyM2I0NGQ1ZGY4NTA1M2E2NCIsIm5iZiI6MTc2OTY1ODEyMy4xMzYsInN1YiI6IjY5N2FkNzBiY2VhNzhhMGRiYzhmOGFhNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sECnoPIecqeqEVfZsxsYtnSegaVtrj9uW3v4fgSuz6k";
+    "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YTA3MzAyNTFjYzIzMmYyM2I0NGQ1ZGY4NTA1M2E2NCIsIm5iZiI6MTc2OTY1ODEyMy4xMzYsInN1YiI6IjY5N2FkNzBiY2VhNzhhMGRiYzhmOGFhNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sECnoPIecqeqEVfZsxsYtnSegaVtrj9uW3v4fgSuz6k"; // Keep this secure!
 
-  const res = await fetch(
-    "https://api.themoviedb.org/3/genre/movie/list?language=en",
-    {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
+  try {
+    const res = await fetch(
+      "https://api.themoviedb.org/3/genre/movie/list?language=en",
+      {
+        method: "GET",
+        headers: {
+          accept: "application/json", // TMDB recommends adding this
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        // Optional: add a signal if you want to abort the fetch
       },
-    },
-  );
+    );
 
-  if (!res.ok) return [];
-  const data = await res.json();
-  console.log(data.genres);
-  return data.genres;
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.error("TMDB API Error:", errorData.status_message);
+      return [];
+    }
+
+    const data = await res.json();
+    return data.genres || [];
+  } catch (error) {
+    console.error("Network or Fetch error:", error);
+    return [];
+  }
 };
 
 export const Nav = async () => {
