@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { data } from "react-router-dom";
-import { SearchInput } from "./Search";
+// import { SearchInput } from "./Search";
 import { Search } from "lucide-react";
 
 export const getMovieGenre = async () => {
@@ -105,7 +105,7 @@ export const Nav = async () => {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <SearchInput />
+        <Search />
       </div>
 
       <div className="flex items-center gap-3">

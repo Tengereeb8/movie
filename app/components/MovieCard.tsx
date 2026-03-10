@@ -18,7 +18,8 @@ export const MovieCard = (props: MovieCardProps) => {
         <img src="/Star.svg" alt="" className="w-4 h-4 dark:hidden" />
         <img src="/wstar.svg" alt="" className="w-4 h-4 hidden dark:flex" />
         <p className="font-medium">
-          {rating} <span className="text-[#71717a]">/10</span>
+          {Number(rating).toFixed(1)}{" "}
+          <span className="text-[#71717a]">/10</span>
         </p>
       </div>
 

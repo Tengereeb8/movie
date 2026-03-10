@@ -15,6 +15,7 @@
 // };
 // export default Home;
 
+import { Carousel } from "@/components/ui/carousel";
 import { Body } from "./Body";
 import { MovieCarousel } from "./Carousel";
 import { Nav } from "./components/Navigation";
@@ -148,7 +149,7 @@ const Home = async () => {
 
   return (
     <div>
-      <MovieCarousel movies={nowPlayingMovies} />
+      <Carousel />
       <Body
         movies={movies}
         upComingMovies={upComingMovies}
